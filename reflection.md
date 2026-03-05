@@ -5,15 +5,25 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 ## 1. What was broken when you started?
 
 - What did the game look like the first time you ran it?
+Game played normally, seemed to be working
 - List at least two concrete bugs you noticed at the start  
   (for example: "the secret number kept changing" or "the hints were backwards").
+  1.The hints were incorrect, kept telling me to guess lower no matter what I input. I expected it to tell me higher or lower based on my guesses. For example, it said "lower" even when I guessed 1, when the secret number was between 1 and 100 and ended up being 83.
+
+  2.On easy mode, the secret number was supposed to be between 1 and 20 but ended up being 40. Again it kept telling me to guess lower despite the number being above the supposed range.
+
+  3.I expected the new game button to restart the game, but it did nothing.
+
+  4.The score given is negative, even if you win
 
 ---
 
 ## 2. How did you use AI as a teammate?
 
 - Which AI tools did you use on this project (for example: ChatGPT, Gemini, Copilot)?
+Claude
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
+Claude found that the feedback messages were inverted and that on even-numbered attempts, the secret number was being converted to a string, thus raising a type error. I verified it but I checking the code it wanted to edit to verify what is said, as well as testing out the game afterwards to ensure the edits solved the issue.
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
 
 ---
