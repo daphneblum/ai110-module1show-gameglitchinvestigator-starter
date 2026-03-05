@@ -4,6 +4,7 @@ import streamlit as st
 def get_range_for_difficulty(difficulty: str):
     if difficulty == "Easy":
         return 1, 20
+    # FIXME: The range for easy mode is supposed to be 1-20, but the secret number can be up to 100. This is a bug that needs to be fixed.
     if difficulty == "Normal":
         return 1, 100
     if difficulty == "Hard":
@@ -53,6 +54,7 @@ def update_score(current_score: int, outcome: str, attempt_number: int):
         if points < 10:
             points = 10
         return current_score + points
+    # FIXME: The score is negative even when you win. If you win on first attempt, score is 70. This is a bug that needs to be fixed.
 
     if outcome == "Too High":
         if attempt_number % 2 == 0:
@@ -136,6 +138,7 @@ if new_game:
     st.session_state.secret = random.randint(1, 100)
     st.success("New game started.")
     st.rerun()
+    # FIXME: The new game button is supposed to reset the game, but it does not work. This is a bug that needs to be fixed.
 
 if st.session_state.status != "playing":
     if st.session_state.status == "won":
