@@ -30,6 +30,8 @@ Claude found that the feedback messages were inverted and that on even-numbered 
 
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
 
+An incorrect suggestion was when fixing the reset button. When first starting up the game and switching to easy, it says five attempts left. When you reset the game, it changes the label to say six attempts. Then it gives a game over when you use five attempts, while still saying one attempt left.
+
 ---
 
 ## 3. Debugging and testing your fixes
