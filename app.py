@@ -136,9 +136,9 @@ with col3:
 if new_game:
     st.session_state.attempts = 0
     st.session_state.secret = random.randint(1, 100)
+    st.session_state.status = "playing"
     st.success("New game started.")
     st.rerun()
-    # FIXME: The new game button is supposed to reset the game, but it does not work. This is a bug that needs to be fixed.
 
 if st.session_state.status != "playing":
     if st.session_state.status == "won":

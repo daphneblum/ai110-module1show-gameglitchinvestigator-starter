@@ -21,9 +21,13 @@ Game played normally, seemed to be working
 ## 2. How did you use AI as a teammate?
 
 - Which AI tools did you use on this project (for example: ChatGPT, Gemini, Copilot)?
-Claude
+
+I used Claude Code on this project. 
+
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
+
 Claude found that the feedback messages were inverted and that on even-numbered attempts, the secret number was being converted to a string, thus raising a type error. I verified it but I checking the code it wanted to edit to verify what is said, as well as testing out the game afterwards to ensure the edits solved the issue.
+
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
 
 ---
