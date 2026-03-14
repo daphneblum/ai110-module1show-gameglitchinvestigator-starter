@@ -55,21 +55,12 @@ def check_guess(guess, secret):
         return "Too Low", "📉 Go LOWER!"
 
 
-def update_score(current_score: int, outcome: str, attempt_number: int):
+def update_score(current_score: int, outcome: str):
     """Update score based on outcome and attempt number."""
     if outcome == "Win":
-        points = 100 - 10 * (attempt_number + 1)
-        if points < 10:
-            points = 10
-        return current_score + points
-    # FIXME: The score is negative even when you win. If you win on first attempt, score is 70. This is a bug that needs to be fixed.
+        return current_score
 
-    if outcome == "Too High":
-        if attempt_number % 2 == 0:
-            return current_score + 5
-        return current_score - 5
-
-    if outcome == "Too Low":
-        return current_score - 5
+    if outcome in ("Too High", "Too Low"):
+        return max(current_score - 10, 10)
 
     return current_score

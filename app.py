@@ -39,10 +39,10 @@ if "secret" not in st.session_state or st.session_state.difficulty != difficulty
     st.session_state.difficulty = difficulty
 
 if "attempts" not in st.session_state:
-    st.session_state.attempts = 1
+    st.session_state.attempts = 0
 
 if "score" not in st.session_state:
-    st.session_state.score = 0
+    st.session_state.score = 100
 
 if "status" not in st.session_state:
     st.session_state.status = "playing"
@@ -79,6 +79,7 @@ with col3:
 
 if new_game:
     st.session_state.attempts = 0
+    st.session_state.score = 100
     st.session_state.secret = random.randint(low, high)
     st.session_state.status = "playing"
     st.success("New game started.")
@@ -112,7 +113,6 @@ if submit:
         st.session_state.score = update_score(
             current_score=st.session_state.score,
             outcome=outcome,
-            attempt_number=st.session_state.attempts,
         )
 
         if outcome == "Win":
