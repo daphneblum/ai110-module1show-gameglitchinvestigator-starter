@@ -37,9 +37,16 @@ An incorrect suggestion was when fixing the reset button. When first starting up
 ## 3. Debugging and testing your fixes
 
 - How did you decide whether a bug was really fixed?
+
+I would run the game multiple times, checking for various cases.
+
 - Describe at least one test you ran (manual or using pytest)  
   and what it showed you about your code.
+  
+  One test was switching between difficulty modes, where I realized the game was not resetting the secret number for other modes. For example, it would set the number for normal mode, which was between 1 and 100, but when you switched to easy mode, which was supposed to be 1 to 20, it would not change the secret number to be one in that range. This told me there was a bug regarding the score when the game mode was changed.
+
 - Did AI help you design or understand any tests? How?
+Yes, Claude Code was used to explain what logic was causing the bugs and why they were failing the tests.
 
 ---
 
@@ -49,11 +56,24 @@ An incorrect suggestion was when fixing the reset button. When first starting up
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
 - What change did you make that finally gave the game a stable secret number?
 
+Unfortunately, I never actually saw that bug! I did not realize we could see what the secret number was in the Developer Debug Info until after I had already began working on bugs because the first one I noticed was when trying the game and seeing that the secret number was above the range in the easy mode. Because of this, I seem to have indirectly fixed that bug and therefore am not sure which specific change I made to give a stable secret number. However, the bug likely happened because the secret number was being regenerated each time the script reran instead of being stored in session state.
+
+Streamlit reruns re-execute the script from the beginning to the end. Session state stores variables between reruns.
+
+
 ---
 
 ## 5. Looking ahead: your developer habits
 
 - What is one habit or strategy from this project that you want to reuse in future labs or projects?
   - This could be a testing habit, a prompting strategy, or a way you used Git.
+
+  One habit I would reuse is testing the program after each change instead of making multiple edits at once. Running the game repeatedly helped me confirm whether a fix actually worked and helped reveal other issues, such as problems when switching between difficulty modes. This made it easier to isolate which changes were solving which bugs.
+
 - What is one thing you would do differently next time you work with AI on a coding task?
+
+Next time I would verify AI suggestions more carefully before implementing them. Some of the suggestions from Claude were helpful, but others introduced new issues or misunderstood how the program logic worked. I found that reading the code myself and testing changes step by step was important for confirming whether the suggestion was actually correct.
+
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+
+This project reinforced that AI can be useful for identifying possible issues, but its suggestions still need to be verified carefully. It works best as a debugging assistant rather than something that can reliably fix problems without review.
