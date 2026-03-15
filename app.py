@@ -2,9 +2,7 @@ import random
 import streamlit as st
 from logic_utils import check_guess, parse_guess, update_score, get_range_for_difficulty
 
-
-
-
+#FIX: Refactored logic into logic_utils.py using Copilot Agent mod
 
 st.set_page_config(page_title="Glitchy Guesser", page_icon="🎮")
 
@@ -31,6 +29,11 @@ low, high = get_range_for_difficulty(difficulty)
 st.sidebar.caption(f"Range: {low} to {high}")
 st.sidebar.caption(f"Attempts allowed: {attempt_limit}")
 
+# BUG FIX (using Claude Code): The secret number was not regenerated when the player
+# changed difficulty. Because the default difficulty is "Normal" (index=1), the first
+# secret was always drawn from 1–100. Switching to "Easy" left that out-of-range secret
+# in place since session_state.secret already existed. Fixed by storing the active
+# difficulty in session state and regenerating the secret whenever it changes.
 if "difficulty" not in st.session_state:
     st.session_state.difficulty = difficulty
 
@@ -77,6 +80,10 @@ with col2:
 with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
+# Bug fixed using Claude Code: st.session_state.status was never reset to "playing"
+# when New Game was clicked. After a win or loss, the status check at line 144 would
+# immediately call st.stop(), preventing the game from restarting.
+# Fix: reset status to "playing" alongside the other session state resets.
 if new_game:
     st.session_state.attempts = 0
     st.session_state.score = 100
@@ -103,6 +110,10 @@ if submit:
     else:
         st.session_state.history.append(guess_int)
 
+        # Bug fixed using Claude Code: the secret was incorrectly converted to a string
+        # on even-numbered attempts, causing string (lexicographic) comparisons instead
+        # of numeric ones. This made the game always return "Too Low". Fix: always pass
+        # secret as an integer.
         secret = st.session_state.secret
 
         outcome, message = check_guess(guess_int, secret)

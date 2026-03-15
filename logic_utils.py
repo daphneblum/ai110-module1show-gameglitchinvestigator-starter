@@ -55,6 +55,15 @@ def check_guess(guess, secret):
         return "Too Low", "📉 Go LOWER!"
 
 
+# Bugs fixed using Claude Code:
+# 1. Score was initialized to 0 and win added points on top (e.g. first-try win gave 100
+#    added to 0, but later guesses produced inflated totals like 180). Fixed by starting
+#    score at 100 and having a win simply return the current score unchanged.
+# 2. Wrong guesses used inconsistent +5/-5 adjustments instead of a flat -10 penalty.
+#    Fixed so each incorrect guess deducts 10 points, with a minimum score of 10.
+# 3. attempts was initialized to 1 instead of 0, causing the first guess to be counted
+#    as the second attempt and awarding 90 points instead of 100 on a first-try win.
+#    Fixed by initializing attempts to 0 in app.py.
 def update_score(current_score: int, outcome: str):
     """Update score based on outcome and attempt number."""
     if outcome == "Win":
